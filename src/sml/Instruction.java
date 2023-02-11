@@ -5,7 +5,8 @@ package sml;
 /**
  * Represents an abstract instruction.
  *
- * @author ...
+ * @author Kishen Nakrani
+ * @version 1.0
  */
 public abstract class Instruction {
 	protected final String label;
@@ -50,6 +51,11 @@ public abstract class Instruction {
 
 	// TODO: What does abstract in the declaration below mean?
 	//       (Write a short explanation.)
+
+	// Answer: Abstract methods mean that any non-abstract subclasses that extend class Instruction must implement that method i.e override
+	// it and thus provide a useful overriden version of toString. If the method wasn't declared as abstract, the user wouldn't be forced to necessarily
+	// override it in the non-abstract subclasses. It is a good way to ensure whoever extends class Instruction provides an overriden toString method.
+
 	@Override
 	public abstract String toString();
 
