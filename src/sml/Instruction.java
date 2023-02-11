@@ -50,10 +50,11 @@ public abstract class Instruction {
 	}
 
 	// TODO: What does abstract in the declaration below mean?
-	//       (Write a short explanation.)
+	//       (Write a short explanation.). Done please see below:
 
 	// Answer: Abstract methods mean that any non-abstract subclasses that extend class Instruction must implement that method i.e override
-	// it and thus provide a useful overriden version of toString. If the method wasn't declared as abstract, the user wouldn't be forced to necessarily
+	// it and thus provide a useful overridden implementation of toString specific to that subclass.
+	// If the method wasn't declared as abstract, the user wouldn't be forced to necessarily
 	// override it in the non-abstract subclasses. It is a good way to ensure whoever extends class Instruction provides an overriden toString method.
 
 	@Override
