@@ -7,7 +7,8 @@ import sml.RegisterName;
 // TODO: write a JavaDoc for the class
 
 /**
- * @author
+ * @author Kishen Nakrani
+ * @version 1.0
  */
 
 public class AddInstruction extends Instruction {
@@ -33,5 +34,17 @@ public class AddInstruction extends Instruction {
 	@Override
 	public String toString() {
 		return getLabelString() + getOpcode() + " " + result + " " + source;
+	}
+
+	/// TODO: needs implementation
+	@Override
+	public boolean equals(Object o) {
+		return false;
+	}
+
+	/// TODO: needs implementation
+	@Override
+	public int hashCode() {
+		return 0;
 	}
 }
