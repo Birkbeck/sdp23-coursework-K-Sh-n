@@ -27,7 +27,7 @@ public class MovInstruction extends Instruction {
     @Override
     public int execute(Machine m) {
         m.getRegisters().set(source, number);
-        return NORMAL_PROGRAM_COUNTER_UPDATE;
+        return NORMAL_PROGRAM_COUNTER_UPDATE; // NORMAL means move onto the next instruction like normal, i.e no jumps to another address
     }
 
     @Override
@@ -44,7 +44,7 @@ public class MovInstruction extends Instruction {
 
     @Override
     public String toString() {
-        return getLabelString() + getOpcode() + " " + number + " " + source;
+        return getLabelString() + getOpcode() + " " + source + " " + number ;
     }
 
 }
