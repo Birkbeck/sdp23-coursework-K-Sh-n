@@ -66,7 +66,7 @@ public final class Translator {
         if (line.isEmpty())
             return null;
 
-        String opcode = scan();
+        String opcode = scan(); // scan method defined further down. It returns the first word
         switch (opcode) {
             case AddInstruction.OP_CODE -> {
                 String r = scan();
@@ -82,6 +82,11 @@ public final class Translator {
                 String r = scan();
                 String s = scan();
                 return new DivInstruction(label, Register.valueOf(r), Register.valueOf(s));
+            }
+            case SubInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new SubInstruction(label, Register.valueOf(r), Register.valueOf(s));
             }
             case MovInstruction.OP_CODE -> {
                 String r = scan(); // method scan defined further down. Returns first word of line and remove it from line or "" if blank line
