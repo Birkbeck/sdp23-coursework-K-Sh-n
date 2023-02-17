@@ -46,7 +46,7 @@ public final class Translator {
                 Instruction instruction = getInstruction(label); // getInstruction method retrieves the next instruction (see further down)
                 if (instruction != null) {
                     if (label != null)
-                        labels.addLabel(label, program.size());
+                        labels.addLabel(label, program.size()); // add any label at start of line to Hashmap to keep track of them
                     program.add(instruction);
                 }
             }
@@ -82,6 +82,11 @@ public final class Translator {
                 String r = scan();
                 String s = scan();
                 return new DivInstruction(label, Register.valueOf(r), Register.valueOf(s));
+            }
+            case JnzInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new JnzInstruction(label, Register.valueOf(r), s);
             }
             case SubInstruction.OP_CODE -> {
                 String r = scan();

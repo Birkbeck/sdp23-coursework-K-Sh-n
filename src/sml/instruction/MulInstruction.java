@@ -49,7 +49,6 @@ public class MulInstruction extends Instruction {
         if (!(o instanceof MulInstruction mulInstruction)){
             return false;
         }
-        //return addInstruction.result == result && addInstruction.source == source;
         return result.equals(mulInstruction.result) && source.equals(mulInstruction.source);
     }
 
