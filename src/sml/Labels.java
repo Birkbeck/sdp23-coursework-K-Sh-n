@@ -8,7 +8,8 @@ import java.util.Objects;
 
 /**
  *
- * @author ...
+ *  * @author Kishen Nakrani
+ *  * @version 1.0
  */
 public final class Labels {
 	private final Map<String, Integer> labels = new HashMap<>();
@@ -22,6 +23,7 @@ public final class Labels {
 	public void addLabel(String label, int address) {
 		Objects.requireNonNull(label);
 		// TODO: Add a check that there are no label duplicates.
+		// Maybe think about looping through the Hashmap and checking if that <String, Integer combination> exists already
 		labels.put(label, address);
 	}
 
@@ -35,6 +37,9 @@ public final class Labels {
 		// TODO: Where can NullPointerException be thrown here?
 		//       (Write an explanation.)
 		//       Add code to deal with non-existent labels.
+
+		// Can be thrown if the key doesnt exist i.e if there is no label. so if thinking about
+		// label f4. If f doesnt exist then a NullPointerException would be thrown
 		return labels.get(label);
 	}
 

@@ -16,10 +16,10 @@ public class MovInstruction extends Instruction {
     private final int number;
 
 
-    public static final String MOV_OP_CODE = "mov";
+    public static final String OP_CODE = "mov";
 
     public MovInstruction(String label, RegisterName source, int number) {
-        super(label, MOV_OP_CODE);
+        super(label, OP_CODE);
         this.source = source;
         this.number = number;
     }

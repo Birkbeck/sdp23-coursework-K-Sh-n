@@ -1,6 +1,11 @@
 package sml;
 
+import sml.instruction.AddInstruction;
+import sml.instruction.MovInstruction;
+
 import java.io.IOException;
+
+//import static sml.instruction.MovInstruction.OP_CODE;
 
 public class Main {
 	/**
@@ -27,6 +32,9 @@ public class Main {
 			System.out.println("Ending program execution.");
 
 			System.out.println("Values of registers at program termination:" + m.getRegisters() + ".");
+
+
+
 		}
 		catch (IOException e) {
 			System.out.println("Error reading the program from " + args[0]);

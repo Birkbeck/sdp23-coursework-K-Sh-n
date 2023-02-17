@@ -14,8 +14,9 @@ import static sml.Registers.Register;
  * This class ....
  * <p>
  * The translator of a <b>S</b><b>M</b>al<b>L</b> program.
- *
- * @author ...
+ * <p>
+ * * @author Kishen Nakrani
+ * * @version 1.0
  */
 public final class Translator {
 
@@ -25,7 +26,7 @@ public final class Translator {
     private String line = "";
 
     public Translator(String fileName) {
-        this.fileName =  fileName;
+        this.fileName = fileName;
     }
 
     // translate the small program in the file into lab (the labels) and
@@ -40,9 +41,9 @@ public final class Translator {
             // Each iteration processes line and reads the next input line into "line"
             while (sc.hasNextLine()) {
                 line = sc.nextLine();
-                String label = getLabel();
+                String label = getLabel(); // getLabel method checks whether or not a label exists and returns if it does e.g returns f4 (without colon) (see further down)
 
-                Instruction instruction = getInstruction(label);
+                Instruction instruction = getInstruction(label); // getInstruction method retrieves the next instruction (see further down)
                 if (instruction != null) {
                     if (label != null)
                         labels.addLabel(label, program.size());
@@ -72,6 +73,17 @@ public final class Translator {
                 String s = scan();
                 return new AddInstruction(label, Register.valueOf(r), Register.valueOf(s));
             }
+            case MulInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new MulInstruction(label, Register.valueOf(r), Register.valueOf(s));
+            }
+            case MovInstruction.OP_CODE -> {
+                String r = scan(); // method scan defined further down. Returns first word of line and remove it from line or "" if blank line
+                int s = Integer.parseInt(scan());
+                return new MovInstruction(label, Register.valueOf(r), s); // Register.valueOf(r) returns the enum constant of the specified enum type with the specified name.
+            }
+
 
             // TODO: add code for all other types of instructions
 
