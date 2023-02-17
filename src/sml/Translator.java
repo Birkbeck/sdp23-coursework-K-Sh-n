@@ -78,6 +78,11 @@ public final class Translator {
                 String s = scan();
                 return new MulInstruction(label, Register.valueOf(r), Register.valueOf(s));
             }
+            case DivInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new DivInstruction(label, Register.valueOf(r), Register.valueOf(s));
+            }
             case MovInstruction.OP_CODE -> {
                 String r = scan(); // method scan defined further down. Returns first word of line and remove it from line or "" if blank line
                 int s = Integer.parseInt(scan());
