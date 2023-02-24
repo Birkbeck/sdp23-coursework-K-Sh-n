@@ -26,7 +26,7 @@ public class DivInstruction extends Instruction {
     }
 
     @Override
-    public int execute(Machine m) {
+    public int execute(Machine m) throws ArithmeticException { //throws Arithmetic Exception since user may divide by 0
         int value1 = m.getRegisters().get(result);
         int value2 = m.getRegisters().get(source);
         m.getRegisters().set(result, value1 / value2);

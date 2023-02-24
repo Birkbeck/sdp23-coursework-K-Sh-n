@@ -32,12 +32,16 @@ public class Main {
 			System.out.println("Ending program execution.");
 
 			System.out.println("Values of registers at program termination:" + m.getRegisters() + ".");
+			System.out.println("Values of labels at program termination:" + m.getLabels() + "."); // I added this
 
 
 
 		}
 		catch (IOException e) {
 			System.out.println("Error reading the program from " + args[0]);
+		}
+		catch (ArithmeticException ae) {
+			System.out.println("Error with Arithmetic, have you divided by zero?");
 		}
 	}
 }

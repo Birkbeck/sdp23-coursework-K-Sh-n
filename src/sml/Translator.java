@@ -46,8 +46,8 @@ public final class Translator {
                 Instruction instruction = getInstruction(label); // getInstruction method retrieves the next instruction (see further down)
                 if (instruction != null) {
                     if (label != null)
-                        labels.addLabel(label, program.size()); // add any label at start of line to Hashmap to keep track of them
-                    program.add(instruction);
+                        labels.addLabel(label, program.size()); // add to machine instance any label at start of line to Hashmap to keep track of them
+                    program.add(instruction); // add to machine instance: an instruction object that gets added to program (which is nothing but an arraylist of instructions)
                 }
             }
         }
