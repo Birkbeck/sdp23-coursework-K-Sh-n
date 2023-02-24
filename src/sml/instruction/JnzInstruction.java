@@ -28,7 +28,7 @@ public class JnzInstruction extends Instruction {
     }
 
     @Override
-    public int execute(Machine m) {
+    public int execute(Machine m) throws NullPointerException{
         int registerValue = m.getRegisters().get(result);
         if (registerValue == 0){
             return NORMAL_PROGRAM_COUNTER_UPDATE;

@@ -38,18 +38,6 @@ public class AddInstruction extends Instruction {
         return getLabelString() + getOpcode() + " " + result + " " + source;
     }
 
-    /// TODO: needs implementation
-/*	    @Override
-        public boolean equals(Object o) {
-		return false;
-	}*/
-
-    /// TODO: needs implementation
-/*    @Override
-    public int hashCode() {
-        return 0;
-    }*/
-
     @Override
     public boolean equals(Object o) {
         if (this == o){

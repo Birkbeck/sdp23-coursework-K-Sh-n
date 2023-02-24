@@ -41,7 +41,10 @@ public class Main {
 			System.out.println("Error reading the program from " + args[0]);
 		}
 		catch (ArithmeticException ae) {
-			System.out.println("Error with Arithmetic, have you divided by zero?");
+			System.out.println("Error! .sml file has an error with Arithmetic, please check if you have a divide instriction that divides by zero");
+		}
+		catch (NullPointerException np) {
+			System.out.println("Error! .sml file has a jnz instruction that refers to a label that doesn't exist. Please check");
 		}
 	}
 }
