@@ -32,7 +32,7 @@ public class Main {
 			System.out.println("Ending program execution.");
 
 			System.out.println("Values of registers at program termination:" + m.getRegisters() + ".");
-			System.out.println("Values of labels at program termination:" + m.getLabels() + "."); // I added this
+			//System.out.println("Values of labels at program termination:" + m.getLabels() + "."); // I added this
 
 
 
