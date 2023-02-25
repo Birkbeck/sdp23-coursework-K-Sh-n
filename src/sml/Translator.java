@@ -4,8 +4,12 @@ import sml.instruction.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import static sml.Registers.Register;
@@ -33,7 +37,7 @@ public final class Translator {
     // prog (the program)
     // return "no errors were detected"
 
-    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException {
+    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         try (var sc = new Scanner(new File(fileName), StandardCharsets.UTF_8)) {
             labels.reset();
             program.clear();
@@ -62,11 +66,49 @@ public final class Translator {
      * The input line should consist of a single SML instruction,
      * with its label already removed.
      */
-    private Instruction getInstruction(String label) {
+    private Instruction getInstruction(String label) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+
+        final Map<String, Class<? extends Instruction>> opcodeClassMap = new HashMap<>();
+
+        opcodeClassMap.put(AddInstruction.OP_CODE, AddInstruction.class);
+        opcodeClassMap.put(DivInstruction.OP_CODE, DivInstruction.class);
+        opcodeClassMap.put(JnzInstruction.OP_CODE, JnzInstruction.class);
+        opcodeClassMap.put(MovInstruction.OP_CODE, MovInstruction.class);
+        opcodeClassMap.put(MulInstruction.OP_CODE, MulInstruction.class);
+        opcodeClassMap.put(OutInstruction.OP_CODE, OutInstruction.class);
+        opcodeClassMap.put(SubInstruction.OP_CODE, SubInstruction.class);
+
+
         if (line.isEmpty())
             return null;
 
         String opcode = scan(); // scan method defined further down. It returns the first word
+
+        Class<?> ClassInstruction = opcodeClassMap.get(opcode);
+        Instruction ins;
+        String r = scan();
+
+        if (ClassInstruction == OutInstruction.class) {
+            Constructor<?> constructor = ClassInstruction.getConstructor(String.class, RegisterName.class);
+            ins = (Instruction) constructor.newInstance(label, Register.valueOf(r));
+        } else if (ClassInstruction == JnzInstruction.class) {
+            Constructor<?> constructor = ClassInstruction.getConstructor(String.class, RegisterName.class, String.class);
+            String s = scan();
+            ins = (Instruction) constructor.newInstance(label, Register.valueOf(r), s);
+        } else if (ClassInstruction == MovInstruction.class) {
+            Constructor<?> constructor = ClassInstruction.getConstructor(String.class, RegisterName.class, int.class);
+            int s = Integer.parseInt(scan());
+            ins = (Instruction) constructor.newInstance(label, Register.valueOf(r), s);
+        } else {
+            Constructor<?> constructor = ClassInstruction.getConstructor(String.class, RegisterName.class, RegisterName.class);
+            String s = scan();
+            ins = (Instruction) constructor.newInstance(label, Register.valueOf(r), Register.valueOf(s));
+        }
+        return ins;
+    }
+
+
+        /*
         switch (opcode) {
             case AddInstruction.OP_CODE -> {
                 String r = scan();
@@ -116,7 +158,9 @@ public final class Translator {
             }
         }
         return null;
-    }
+
+    */
+
 
 
     private String getLabel() {
