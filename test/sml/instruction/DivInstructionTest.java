@@ -56,7 +56,7 @@ class DivInstructionTest {
     }
 
     @Test
-    void printOut() {
+    void toStringTest() {
         registers.set(EAX, 60);
         registers.set(EBX, 12);
         Instruction instruction = new DivInstruction(null, EAX, EBX);
@@ -64,5 +64,25 @@ class DivInstructionTest {
         String string1 = "div EAX EBX";
         String string2 = instruction.toString();
         Assertions.assertEquals(string1, string2);
+    }
+
+    @Test
+    void EqualsMethodOverridenTrue(){
+        registers.set(EAX, -5);
+        registers.set(EBX, 6);
+        Instruction instruction = new DivInstruction(null, EAX, EBX);
+        Instruction instruction2 = new DivInstruction(null, EAX, EBX);
+        instruction.execute(machine);
+        Assertions.assertEquals(instruction, instruction2);
+    }
+
+    @Test
+    void EqualsMethodOverridenFalse(){
+        registers.set(EAX, -5);
+        registers.set(EBX, 6);
+        Instruction instruction = new DivInstruction(null, EAX, EBX);
+        Instruction instruction2 = new DivInstruction(null, EAX, ECX);
+        instruction.execute(machine);
+        Assertions.assertNotEquals(instruction, instruction2);
     }
 }

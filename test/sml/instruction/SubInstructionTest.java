@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import sml.Instruction;
+import sml.Labels;
 import sml.Machine;
 import sml.Registers;
 
@@ -47,7 +48,7 @@ class SubInstructionTest {
     }
 
     @Test
-    void printOut() {
+    void toStringTest() {
         registers.set(EAX, -5);
         registers.set(EBX, 6);
         Instruction instruction = new SubInstruction(null, EAX, EBX);
@@ -55,5 +56,24 @@ class SubInstructionTest {
         String string1 = "sub EAX EBX";
         String string2 = instruction.toString();
         Assertions.assertEquals(string1, string2);
+    }
+@Test
+    void EqualsMethodOverridenTrue(){
+        registers.set(EAX, -5);
+        registers.set(EBX, 6);
+        Instruction instruction = new SubInstruction(null, EAX, EBX);
+        Instruction instruction2 = new SubInstruction(null, EAX, EBX);
+        instruction.execute(machine);
+        Assertions.assertEquals(instruction, instruction2);
+    }
+
+    @Test
+    void EqualsMethodOverridenFalse(){
+        registers.set(EAX, -5);
+        registers.set(EBX, 6);
+        Instruction instruction = new SubInstruction(null, EAX, EBX);
+        Instruction instruction2 = new SubInstruction(null, EAX, ECX);
+        instruction.execute(machine);
+        Assertions.assertNotEquals(instruction, instruction2);
     }
 }

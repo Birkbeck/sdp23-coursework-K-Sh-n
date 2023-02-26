@@ -28,6 +28,7 @@ class LabelsTest {
         newLabel.addLabel("f3",0);
         newLabel.addLabel("g3",1);
         newLabel.addLabel("h3",2);
+        newLabel.addLabel("i3",3);
     }
 
     @AfterEach
@@ -43,8 +44,8 @@ class LabelsTest {
     }
 
     @Test
-    void LabelshouldPrintOutFormatted() {
-        Assertions.assertEquals("[f3 -> 0, g3 -> 1, h3 -> 2]", newLabel.toString());
+    void toStringTest() {
+        Assertions.assertEquals("[f3 -> 0, g3 -> 1, h3 -> 2, i3 -> 3]", newLabel.toString());
     }
 
 
@@ -60,5 +61,25 @@ class LabelsTest {
         String actual = outputStream.toString().trim();
 
         Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    void LabelEqualsMethodOverridenTrue(){
+        Labels newLabel2 = new Labels();
+        newLabel2.addLabel("f3",0);
+        newLabel2.addLabel("g3",1);
+        newLabel2.addLabel("h3",2);
+        newLabel2.addLabel("i3",3);
+        Assertions.assertEquals(newLabel, newLabel2);
+    }
+
+    @Test
+    void LabelEqualsMethodOverridenFalse(){
+        Labels newLabel2 = new Labels();
+        newLabel2.addLabel("f3",0);
+        newLabel2.addLabel("g3",1);
+        newLabel2.addLabel("h3",2);
+        newLabel2.addLabel("i3",4);
+        Assertions.assertNotEquals(newLabel, newLabel2);
     }
 }

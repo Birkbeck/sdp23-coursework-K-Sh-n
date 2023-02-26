@@ -8,8 +8,7 @@ import sml.Instruction;
 import sml.Machine;
 import sml.Registers;
 
-import static sml.Registers.Register.EAX;
-import static sml.Registers.Register.EBX;
+import static sml.Registers.Register.*;
 
 class MovInstructionTest {
     private Machine machine;
@@ -46,11 +45,27 @@ class MovInstructionTest {
     }
 
     @Test
-    void printOut() {
+    void toStringTest() {
         Instruction instruction = new MovInstruction(null, EAX, 5);
         instruction.execute(machine);
         String string1 = "mov EAX 5";
         String string2 = instruction.toString();
         Assertions.assertEquals(string1, string2);
+    }
+
+    @Test
+    void EqualsMethodOverridenTrue(){
+        Instruction instruction = new MovInstruction(null, EAX, 5);
+        Instruction instruction2 = new MovInstruction(null, EAX, 5);
+        instruction.execute(machine);
+        Assertions.assertEquals(instruction, instruction2);
+    }
+
+    @Test
+    void EqualsMethodOverridenFalse(){
+        Instruction instruction = new MovInstruction(null, EAX, 5);
+        Instruction instruction2 = new MovInstruction(null, EAX, 10);
+        instruction.execute(machine);
+        Assertions.assertNotEquals(instruction, instruction2);
     }
 }

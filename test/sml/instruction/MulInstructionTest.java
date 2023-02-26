@@ -47,7 +47,7 @@ class MulInstructionTest {
     }
 
     @Test
-    void printOut() {
+    void toStringTest() {
         registers.set(EAX, -5);
         registers.set(EBX, 6);
         Instruction instruction = new MulInstruction(null, EAX, EBX);
@@ -55,5 +55,25 @@ class MulInstructionTest {
         String string1 = "mul EAX EBX";
         String string2 = instruction.toString();
         Assertions.assertEquals(string1, string2);
+    }
+
+    @Test
+    void EqualsMethodOverridenTrue(){
+        registers.set(EAX, -5);
+        registers.set(EBX, 6);
+        Instruction instruction = new MulInstruction(null, EAX, EBX);
+        Instruction instruction2 = new MulInstruction(null, EAX, EBX);
+        instruction.execute(machine);
+        Assertions.assertEquals(instruction, instruction2);
+    }
+
+    @Test
+    void EqualsMethodOverridenFalse(){
+        registers.set(EAX, -5);
+        registers.set(EBX, 6);
+        Instruction instruction = new MulInstruction(null, EAX, EBX);
+        Instruction instruction2 = new MulInstruction(null, EAX, ECX);
+        instruction.execute(machine);
+        Assertions.assertNotEquals(instruction, instruction2);
     }
 }
