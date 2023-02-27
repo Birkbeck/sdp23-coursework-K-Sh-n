@@ -8,14 +8,17 @@ import java.util.stream.Collectors;
 // TODO: write a JavaDoc for the class
 
 /**
- * * @author Kishen Nakrani
- * * @version 1.0
+ * Represents the Labels in the language stored as a Map with methods to add and retrieve Labels and their corresponding int address value.
+ * Duplicate labels are not allowed and adding one will cause the program to terminate
+ * Similarly retrieving a Label that does not exist will throw a NullPointerException exception
+ * @author Kishen Nakrani
+ * @version 1.0
  */
 public final class Labels {
     private final Map<String, Integer> labels = new HashMap<>();
 
     /**
-     * Adds a label with the associated address to the map.
+     * Adds a label with the associated address to the map providing that the label does not already exist
      *
      * @param label   the label
      * @param address the address the label refers to
@@ -23,7 +26,6 @@ public final class Labels {
     public void addLabel(String label, int address) {
         Objects.requireNonNull(label);
         // TODO: Add a check that there are no label duplicates.
-
 
         if (!labels.containsKey(label)) {
             labels.put(label, address);
@@ -66,17 +68,32 @@ public final class Labels {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
+    /**
+     * Override equals method to check if a Register object is equal to another Object
+     * @param o is the Object that this Register object is compared to
+     * @return true if this Register object and the Object (o) are equal or false if this Register object and the Object (o) are not equal
+     */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Labels labels1 = (Labels) o;
-        return labels.equals(labels1.labels);
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        Labels l = (Labels) o;
+        return labels.equals(l.labels);
     }
 
+    /**
+     * Override HashCode method for this Label
+     * @return the hashCode for this Label
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(labels);
+        return labels.entrySet().stream()
+                .mapToInt(label -> Objects.hash(label.getKey(), label.getValue()))
+                .sum();
     }
 
     /**

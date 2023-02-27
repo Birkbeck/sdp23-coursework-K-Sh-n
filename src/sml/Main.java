@@ -28,7 +28,6 @@ public class Main {
             System.out.println("Ending program execution.");
 
             System.out.println("Values of registers at program termination:" + m.getRegisters() + ".");
-            System.out.println("Values of labels at program termination:" + m.getLabels() + "."); // I added this
 
 
         } catch (IOException e) {
@@ -38,7 +37,7 @@ public class Main {
         } catch (NullPointerException np) {
             System.out.println("Error! .sml file has a jnz instruction that refers to a label that doesn't exist. Please check");
         } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error! The method you have invoked has thrown an exception");
         } catch (NoSuchMethodException e) {
             System.out.println("Error! That constructor does not exist");
         } catch (InstantiationException e) {
