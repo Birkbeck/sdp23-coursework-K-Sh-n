@@ -37,7 +37,7 @@ public final class Translator {
     // prog (the program)
     // return "no errors were detected"
 
-    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         try (var sc = new Scanner(new File(fileName), StandardCharsets.UTF_8)) {
             labels.reset();
             program.clear();
@@ -66,25 +66,16 @@ public final class Translator {
      * The input line should consist of a single SML instruction,
      * with its label already removed.
      */
-    private Instruction getInstruction(String label) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-
-        final Map<String, Class<? extends Instruction>> opcodeClassMap = new HashMap<>();
-
-        opcodeClassMap.put(AddInstruction.OP_CODE, AddInstruction.class);
-        opcodeClassMap.put(DivInstruction.OP_CODE, DivInstruction.class);
-        opcodeClassMap.put(JnzInstruction.OP_CODE, JnzInstruction.class);
-        opcodeClassMap.put(MovInstruction.OP_CODE, MovInstruction.class);
-        opcodeClassMap.put(MulInstruction.OP_CODE, MulInstruction.class);
-        opcodeClassMap.put(OutInstruction.OP_CODE, OutInstruction.class);
-        opcodeClassMap.put(SubInstruction.OP_CODE, SubInstruction.class);
-
+    private Instruction getInstruction(String label) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
         if (line.isEmpty())
             return null;
 
         String opcode = scan(); // scan method defined further down. It returns the first word
+        String opcodeClass =  "sml.instruction." + opcode.substring(0,1).toUpperCase() + opcode.substring(1).toLowerCase() + "Instruction";
 
-        Class<?> ClassInstruction = opcodeClassMap.get(opcode);
+        Class<?> ClassInstruction = Class.forName(opcodeClass);
+
         Instruction ins;
         String r = scan();
 
@@ -160,7 +151,6 @@ public final class Translator {
         return null;
 
     */
-
 
 
     private String getLabel() {

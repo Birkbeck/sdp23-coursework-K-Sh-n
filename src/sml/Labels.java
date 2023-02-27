@@ -28,7 +28,7 @@ public final class Labels {
         if (!labels.containsKey(label)) {
             labels.put(label, address);
         } else {
-            System.err.println(" Error! There is atleast one duplicate label, please double check the .sml file ");
+            System.err.println("Error! There is atleast one duplicate label, please double check the .sml file ");
             System.exit(-1);
         }
     }

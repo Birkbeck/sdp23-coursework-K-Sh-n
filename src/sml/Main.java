@@ -1,12 +1,7 @@
 package sml;
 
-import sml.instruction.AddInstruction;
-import sml.instruction.MovInstruction;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-
-//import static sml.instruction.MovInstruction.OP_CODE;
 
 public class Main {
     /**
@@ -50,6 +45,8 @@ public class Main {
             System.out.println("Error! The specified class object you are trying to create cannot be instantiated");
         } catch (IllegalAccessException e) {
             System.out.println("Error! You do not have access to the constructor you are trying to call");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error! The class you are trying to find does not exist");
         }
     }
 }
