@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sml.Instruction;
+import sml.Labels;
 import sml.Machine;
 import sml.Registers;
 
 import static sml.Registers.Register.EAX;
+import static sml.Registers.Register.EBX;
 
 class JnzInstructionTest {
     private Machine machine;
@@ -26,6 +28,29 @@ class JnzInstructionTest {
     void tearDown() {
         machine = null;
         registers = null;
+    }
+
+    @Test
+    void NullPointerExceptionTest() {
+        registers.set(EAX, 48);
+        Instruction instruction = new JnzInstruction(null, EAX, "f3");
+        Assertions.assertThrows(NullPointerException.class, () -> instruction.execute(machine));
+    }
+
+    @Test
+    void noJumpTest() {
+        registers.set(EAX, 0);
+        registers.set(EBX, 5);
+        Instruction instruction = new JnzInstruction(null, EAX, "f5");
+        Assertions.assertEquals(-1, instruction.execute(machine));
+    }
+
+    @Test
+    void JumpTest() {
+        registers.set(EAX, 15);
+        machine.getLabels().addLabel("f5",0);
+        Instruction instruction2 = new JnzInstruction(null, EAX, "f5");
+        Assertions.assertEquals(0, instruction2.execute(machine));
     }
 
 

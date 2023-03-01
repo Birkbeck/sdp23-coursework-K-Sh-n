@@ -56,6 +56,14 @@ class DivInstructionTest {
     }
 
     @Test
+    void ArithmeticExceptionTest() {
+        registers.set(EAX, 48);
+        registers.set(EBX, 0);
+        Instruction instruction = new DivInstruction(null, EAX, EBX);
+        Assertions.assertThrows(ArithmeticException.class, () -> instruction.execute(machine));
+    }
+
+    @Test
     void toStringTest() {
         registers.set(EAX, 60);
         registers.set(EBX, 12);
@@ -67,7 +75,7 @@ class DivInstructionTest {
     }
 
     @Test
-    void EqualsMethodOverridenTrue(){
+    void EqualsMethodOverridenTrue() {
         registers.set(EAX, -5);
         registers.set(EBX, 6);
         Instruction instruction = new DivInstruction(null, EAX, EBX);
@@ -77,7 +85,7 @@ class DivInstructionTest {
     }
 
     @Test
-    void EqualsMethodOverridenFalse(){
+    void EqualsMethodOverridenFalse() {
         registers.set(EAX, -5);
         registers.set(EBX, 6);
         Instruction instruction = new DivInstruction(null, EAX, EBX);

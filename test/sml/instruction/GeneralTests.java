@@ -53,7 +53,6 @@ class GeneralTests {
         Instruction instruction2 = new SubInstruction("f3", EBP, EDI);
         Instruction instruction3 = new AddInstruction(null, EAX, EBP);
 
-
         instruction.execute(machine);
         instruction2.execute(machine);
         instruction3.execute(machine);
