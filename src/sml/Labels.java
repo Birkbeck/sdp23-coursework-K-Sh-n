@@ -89,12 +89,13 @@ public final class Labels {
      * Override HashCode method for this Label
      * @return the hashCode for this Label
      */
+
     @Override
     public int hashCode() {
-        return labels.entrySet().stream()
-                .mapToInt(label -> Objects.hash(label.getKey(), label.getValue()))
-                .sum();
+        return Objects.hash(labels);
     }
+
+
 
     /**
      * Removes the labels

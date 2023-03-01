@@ -45,7 +45,7 @@ public class Main {
         } catch (IllegalAccessException e) {
             System.out.println("Error! You do not have access to the constructor you are trying to call");
         } catch (ClassNotFoundException e) {
-            System.out.println("Error! The class you are trying to find does not exist");
+            System.out.println("Error! The Instruction you are trying to process has not been found");
         }
     }
 }

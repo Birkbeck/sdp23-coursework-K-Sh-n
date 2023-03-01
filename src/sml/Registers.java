@@ -78,9 +78,7 @@ public final class Registers {
      */
     @Override
     public int hashCode() {
-        return registers.entrySet().stream()
-                .mapToInt(register -> Objects.hash(register.getKey(), register.getValue()))
-                .sum();
+        return Objects.hash(registers);
     }
 
     /**

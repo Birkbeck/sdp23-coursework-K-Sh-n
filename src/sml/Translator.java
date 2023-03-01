@@ -79,6 +79,7 @@ public final class Translator {
         Instruction ins;
         String r = scan();
 
+
         if (ClassInstruction == OutInstruction.class) {
             Constructor<?> constructor = ClassInstruction.getConstructor(String.class, RegisterName.class);
             ins = (Instruction) constructor.newInstance(label, Register.valueOf(r));
@@ -97,60 +98,6 @@ public final class Translator {
         }
         return ins;
     }
-
-
-        /*
-        switch (opcode) {
-            case AddInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new AddInstruction(label, Register.valueOf(r), Register.valueOf(s));
-            }
-            case MulInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new MulInstruction(label, Register.valueOf(r), Register.valueOf(s));
-            }
-            case DivInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new DivInstruction(label, Register.valueOf(r), Register.valueOf(s));
-            }
-            case JnzInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new JnzInstruction(label, Register.valueOf(r), s);
-            }
-            case SubInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new SubInstruction(label, Register.valueOf(r), Register.valueOf(s));
-            }
-            case OutInstruction.OP_CODE -> {
-                String r = scan();
-                return new OutInstruction(label, Register.valueOf(r));
-            }
-            case MovInstruction.OP_CODE -> {
-                String r = scan(); // method scan defined further down. Returns first word of line and remove it from line or "" if blank line
-                int s = Integer.parseInt(scan());
-                return new MovInstruction(label, Register.valueOf(r), s); // Register.valueOf(r) returns the enum constant of the specified enum type with the specified name.
-            }
-
-
-            // TODO: add code for all other types of instructions
-
-            // TODO: Then, replace the switch by using the Reflection API
-
-            // TODO: Next, use dependency injection to allow this machine class
-            //       to work with different sets of opcodes (different CPUs)
-
-            default -> {
-                System.out.println("Unknown instruction: " + opcode);
-            }
-        }
-        return null;
-
-    */
 
 
     private String getLabel() {
